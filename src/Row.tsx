@@ -35,7 +35,7 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
 
   return(
     <div className="Row">
-      <h2>{title}</h2>
+      <h2 className="Row-title">{title}</h2>
       <div className="Row-posters">
         {/* eslint-disable-next-line array-callback-return */}
         {movies.map((movie) => { if (isImageExist(movie)) {

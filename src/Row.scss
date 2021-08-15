@@ -2,6 +2,12 @@
   margin-left: 20px;
   color: #fff;
 
+  &-title {
+    color: black;
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+
   &-posters {
     display: flex;
     overflow-y: hidden;
