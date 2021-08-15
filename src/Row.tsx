@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { instance, tmdbUrl } from './axios'
+import { instance, tmdbUrl, fetchTrailerUrl } from './axios'
+import YouTube from 'react-youtube';
 import './Row.scss';
 
 type Props = {
@@ -17,8 +18,26 @@ type Movie = {
   backdrop_path: string;
 };
 
+//trailerのoption
+type Options = {
+  height: string;
+  width: string;
+  playerVars: {
+    autoplay: 0 | 1 | undefined;
+  };
+};
+
+const opts: Options = {
+  height: "390",
+  width: "640",
+  playerVars: {
+    autoplay: 1,
+  },
+};
+
 export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [trailerUrl, setTrailerUrl] = useState<string | null>("");
 
   useEffect(() => {
     async function fetchData() {
@@ -28,6 +47,11 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
     }
     fetchData();
   }, [fetchUrl]);
+
+  const handleClick = async (movie: Movie) => {
+    let trailerurl = await fetchTrailerUrl(movie.id);
+    setTrailerUrl(trailerurl.data.results[0]?.key);
+  };
 
   const isImageExist = (movie: Movie): Boolean => {
     return movie.poster_path != null && movie.backdrop_path != null
@@ -46,10 +70,12 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
                     isLargeRow ? movie.poster_path : movie.backdrop_path
                   }`}
                   alt={movie.name}
+                  onClick={() => handleClick(movie)}
                 />
           }}
         )}
       </div>
+      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
     </div>
   );
 };
