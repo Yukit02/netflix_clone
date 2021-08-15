@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { instance, tmdbUrl, fetchTrailerUrl } from './axios'
+import { instance, tmdbUrl, fetchTrailerUrl } from '../axios'
 import YouTube from 'react-youtube';
-import './Row.scss';
+import '../styles/components/Row.scss'
 
 type Props = {
   title: string;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { instance, tmdbUrl } from './axios'
-import { requests } from './request'
-import './Banner.scss'
+import { instance, tmdbUrl } from '../axios'
+import { requests } from '../request'
+import '../styles/components/Banner.scss'
 
 type movieProps = {
   title?: string;
