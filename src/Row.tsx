@@ -33,8 +33,6 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
     return movie.poster_path != null && movie.backdrop_path != null
   }
 
-  console.log(movies[0]);
-
   return(
     <div className="Row">
       <h2>{title}</h2>
